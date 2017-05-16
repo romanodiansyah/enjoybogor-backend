@@ -25,7 +25,6 @@
 <div class="manageMember">
 	<a href="create.php"><button type="button">Add Menu</button></a>
 	<a href="../../home.php"><button type="button">Home</button></a>
-	<a href="needapprove.php"><button type="button">Need Approve</button></a>
 	<table border="1" cellspacing="0" cellpadding="0">
 		<thead>
 			<tr>
@@ -37,7 +36,7 @@
 		</thead>
 		<tbody>
 			<?php
-			$sql = "SELECT * FROM menus WHERE active = 2";
+			$sql = "SELECT * FROM menus WHERE active = 1";
 			$result = $connect->query($sql);
 			
 			if($result->num_rows >0)
@@ -52,7 +51,8 @@
 						<td> ".$row['menu_description']."</td>
 						<td>
 							<a href='edit.php?menu_id=".$row['menu_id']."'><button type='button'>Edit</button></a>
-							<a href='remove.php?menu_id=".$row['menu_id']."'><button type='button'>Remove</button></a>
+							<a href='remove.php?menu_id=".$row['menu_id']."'><button type='button'>Decline</button></a>
+							<a href='approve.php?menu_id=".$row['menu_id']."'><button type='button'>Approve</button></a>
 						</td>
 					</tr>";
 				}

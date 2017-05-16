@@ -10,7 +10,7 @@ if($_POST)
 	$restaurant_contact = $_POST['restaurant_contact'];
 	$restaurant_description = $_POST['restaurant_description'];
 	
-	$sql = "INSERT INTO restaurants (restaurant_id,menu_id,restaurant_name,restaurant_address,restaurant_category,restaurant_contact,restaurant_description,active) VALUES ('',0,'$restaurant_name','$restaurant_address','$restaurant_category', '$restaurant_contact', '$restaurant_description',1)";
+	$sql = "INSERT INTO restaurants (restaurant_id,restaurant_name,restaurant_address,restaurant_category,restaurant_contact,restaurant_description,active) VALUES ('','$restaurant_name','$restaurant_address','$restaurant_category', '$restaurant_contact', '$restaurant_description',2)";
 	if($connect->query($sql) === TRUE)
 	{
 		echo "<p> New Restaurant Successfully Created</p>";

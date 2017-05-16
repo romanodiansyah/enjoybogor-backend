@@ -1,3 +1,7 @@
+<?php
+	$restaurant_id = $_GET['restaurant_id'];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,6 +46,7 @@
 				<td><input type="textbox" name="menu_description" placeholder="Description" /></td>
 			</tr>
 			<tr>
+				<input type="hidden" name="restaurant_id" value=<?php echo "$restaurant_id";?> />
 				<td><button type="submit">Create</button></td>
 				<td><a href="index.php"><button type="button">Back</button></a></td>
 			</tr>

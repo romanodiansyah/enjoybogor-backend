@@ -23,7 +23,6 @@
 <body>
 
 <div class="manageMember">
-	<a href="create.php"><button type="button">Add Voucher</button></a>
 	<a href="../../home.php"><button type="button">Home</button></a>
 	<table border="1" cellspacing="0" cellpadding="0">
 		<thead>

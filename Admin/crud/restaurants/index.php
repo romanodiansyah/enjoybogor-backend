@@ -1,4 +1,4 @@
-<?php require_once '../../connect/db_connect.php'; ?>
+<?php require_once '../../../connect/db_connect.php'; ?>
 
 <!DOCTYPE html>
 <html>

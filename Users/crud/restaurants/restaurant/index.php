@@ -1,8 +1,12 @@
 <?php require_once '../../../../connect/db_connect.php'; 
 	$restaurant_id=$_GET['restaurant_id'];
-	$ql= "SELECT * FROM restaurants WHERE restaurant_id='$restaurant_id'";
+	$ql= "SELECT * FROM restaurants WHERE restaurant_id='$restaurant_id' AND active=2";
 	$queri = $connect->query($ql);
 	$hasil = $queri->fetch_assoc();
+	$sql= "SELECT * FROM menus WHERE restaurant_id='$restaurant_id' AND active=2";
+	$result = $connect->query($sql);
+	$sqli= "SELECT * FROM ratings_and_comments WHERE restaurant_id='$restaurant_id'";
+	$resulti = $connect->query($sqli);
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +39,75 @@
 	echo "<h1>$hasil[restaurant_name]</br></h1>";
 	echo "$hasil[restaurant_description]";
 ?>
-
+	<table border="1" cellspacing="0" cellpadding="0">
+		<thead>
+			<tr>
+				<th>Food Name</th>
+				<th>Price</th>
+				<th>Portion Size(People)</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+<?php
+		if($result->num_rows >0)
+		{
+			while($row = $result->fetch_assoc())
+			{
+				echo "
+				<tr>
+					<td><a href='../../menus/menu/index.php?menu_id=".$row['menu_id']."'> ".$row['food_name']."</a></td>
+					<td> ".$row['price']."</td>
+					<td> ".$row['portion_size']."</td>
+					<td> ".$row['menu_description']."</td>
+				</tr>";
+			}
+		}
+		else
+		{
+			echo "<tr><td colspan='4'><center>There's no menu available</center></td></tr>";
+		}
+		echo "<tr><td colspan='4'><center><a href='../../menus/create.php?restaurant_id=$restaurant_id'><button type='button'>Add Menu</button></a></center></td></tr>";
+?>
+		</tbody>
+	</table>
+	<table border="0" cellspacing="0" cellpadding="0">
+		<thead>
+			<tr>
+				<th> Comments </th>
+			</tr>
+		</thead>
+	</table>
+<?php
+		if($resulti->num_rows>0)
+		{
+			while($row = $resulti->fetch_assoc())
+			{
+				$pengguna = "SELECT * FROM users WHERE user_id=".$row['user_id']."";
+				$querii = $connect->query($pengguna);
+				$akhir = $querii->fetch_assoc();
+				?>
+				<table border="0" cellpadding="0" cellspacing="0">
+					<thead></thead>
+					<tbody>
+						<tr>
+							<td><center><?php echo $akhir['user_name'];?></center></td>
+							<td><?php echo "nanti bintang disini"?></td>
+						</tr>
+						<tr>
+							<td colspan='2'><center><?php echo "".$row['comment']."";?></center></td>
+						</tr>
+					</tbody>
+				</table>
+		<?php }}else {?>
+				<table border="0" cellpadding="0" cellspacing="0">
+					<thead></thead>
+					<tbody>
+						<tr><td colspan='2'><center>No Comments Available</center></td></tr>
+					</tbody>
+				</table>
+		<?php } ?>
+			
 </body>
 </html>
 </html>

@@ -36,7 +36,7 @@
 		</thead>
 		<tbody>
 			<?php
-			$sql = "SELECT * FROM menus WHERE active = 1";
+			$sql = "SELECT * FROM menus WHERE active = 2";
 			$result = $connect->query($sql);
 			
 			if($result->num_rows >0)

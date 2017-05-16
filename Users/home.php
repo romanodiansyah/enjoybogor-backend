@@ -82,7 +82,7 @@
                     <a href="crud/vouchers/index.php">Vouchers List</a>
                     <a href="crud/menus/index.php">Menu List</a>
 					<a href="function/search/search.php">Search</a>
-					<a href="function/logout/logout.php">Logout</a>
+					<a href="../commonfunction/logout/logout.php">Logout</a>
                 </div>
             </div>
         </div>

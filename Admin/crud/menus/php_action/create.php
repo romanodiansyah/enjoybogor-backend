@@ -9,7 +9,7 @@ if($_POST)
 	$portion_size = $_POST['portion_size'];
 	$menu_description = $_POST['menu_description'];
 		
-	$sql = "INSERT INTO menus (menu_id,restaurant_id,food_name,price,portion_size,menu_description,active) VALUES ('',2,'$food_name','$price','$portion_size', '$menu_description',1)";
+	$sql = "INSERT INTO menus (menu_id,restaurant_id,food_name,price,portion_size,menu_description,active) VALUES ('',2,'$food_name','$price','$portion_size', '$menu_description',2)";
 	if($connect->query($sql) === TRUE)
 	{
 		echo "<p> New Menu Successfully Created</p>";
