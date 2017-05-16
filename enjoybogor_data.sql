@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2017 at 04:53 PM
+-- Generation Time: May 16, 2017 at 10:53 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -19,6 +19,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `enjoybogor_data`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assoc`
+--
+
+CREATE TABLE `assoc` (
+  `user_id` int(11) NOT NULL DEFAULT '-1',
+  `voucher_id` int(11) NOT NULL DEFAULT '-1',
+  `active` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -41,7 +53,8 @@ CREATE TABLE `menus` (
 --
 
 INSERT INTO `menus` (`menu_id`, `restaurant_id`, `food_name`, `price`, `portion_size`, `menu_description`, `active`) VALUES
-(-1, -1, 'Belum Ada Makanan', 0, 0, '-', 0);
+(-1, -1, 'Belum Ada Makanan', 0, 0, '-', 0),
+(1, 5, 'test', 10000, 4, 'enak', 2);
 
 -- --------------------------------------------------------
 
@@ -56,6 +69,13 @@ CREATE TABLE `ratings_and_comments` (
   `rating` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ratings_and_comments`
+--
+
+INSERT INTO `ratings_and_comments` (`user_id`, `restaurant_id`, `comment`, `rating`) VALUES
+(12, 5, 'test comment', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -64,7 +84,6 @@ CREATE TABLE `ratings_and_comments` (
 
 CREATE TABLE `restaurants` (
   `restaurant_id` int(11) NOT NULL,
-  `menu_id` int(11) NOT NULL DEFAULT '0',
   `restaurant_name` varchar(255) NOT NULL,
   `restaurant_address` text NOT NULL,
   `restaurant_category` varchar(20) NOT NULL,
@@ -80,9 +99,11 @@ CREATE TABLE `restaurants` (
 -- Dumping data for table `restaurants`
 --
 
-INSERT INTO `restaurants` (`restaurant_id`, `menu_id`, `restaurant_name`, `restaurant_address`, `restaurant_category`, `restaurant_contact`, `restaurant_description`, `latitude`, `longitude`, `active`, `user`) VALUES
-(-1, -1, 'Tidak Ada Restaurant', '-', 'none', 0, '-', 0, 0, 0, 0),
-(5, -1, 'test', 'lagi', 'terus', 7812, 'tes', 0, 0, 2, 0);
+INSERT INTO `restaurants` (`restaurant_id`, `restaurant_name`, `restaurant_address`, `restaurant_category`, `restaurant_contact`, `restaurant_description`, `latitude`, `longitude`, `active`, `user`) VALUES
+(-1, 'Tidak Ada Restaurant', '-', 'none', 0, '-', 0, 0, 0, 0),
+(5, 'test', 'lagi', 'terus', 7812, 'tes', 0, 0, 2, 0),
+(6, 'tes1', 'tes1', 'tes1', 0, 'tes1', 0, 0, 0, 0),
+(8, 'tes1', 'tes1', 'tes1', 251, 'tes1', 0, 0, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -108,7 +129,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `username`, `user_name`, `date_signup`, `points`, `user_contact`, `email`, `password`, `active`) VALUES
 (-1, 'admin', 'Admin', '2017-05-07 13:50:50', 0, 0, 'admin@enjoybogor.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 1),
-(12, 'jodhi', 'jodhi', '2017-05-13 07:03:11', 0, 4546, 'jodhi@gmail.com', '53cad8e01bd4376c3c75f202a38176ecb23b73d6d76abaa3784db4913539008f', 1);
+(12, 'jodhi', 'jodhi', '2017-05-13 07:03:11', 0, 4546, 'jodhi@gmail.com', '53cad8e01bd4376c3c75f202a38176ecb23b73d6d76abaa3784db4913539008f', 1),
+(13, 'tes1', 'tes1', '2017-05-16 03:34:57', 0, 251, 'tes@gmail.com', '970f3fce6e109b8e83d902c4de153d8b0386f0ccba23ac71e070859d5091ff84', 1);
 
 -- --------------------------------------------------------
 
@@ -148,8 +170,7 @@ ALTER TABLE `ratings_and_comments`
 --
 ALTER TABLE `restaurants`
   ADD PRIMARY KEY (`restaurant_id`),
-  ADD KEY `user` (`user`),
-  ADD KEY `menu_id` (`menu_id`);
+  ADD KEY `user` (`user`);
 
 --
 -- Indexes for table `users`
@@ -171,17 +192,17 @@ ALTER TABLE `vouchers`
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `vouchers`
 --
@@ -203,12 +224,6 @@ ALTER TABLE `menus`
 ALTER TABLE `ratings_and_comments`
   ADD CONSTRAINT `ratings_and_comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   ADD CONSTRAINT `ratings_and_comments_ibfk_2` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`restaurant_id`);
-
---
--- Constraints for table `restaurants`
---
-ALTER TABLE `restaurants`
-  ADD CONSTRAINT `restaurants_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`menu_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
