@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Add Menu</title>
-	
+
 	<style type="text/css">
 		fieldset
 		{
@@ -10,19 +10,25 @@
 			margin-top: 100px
 			widthL 50%;
 		}
-		
+
 		table tr th
 		{
 			padding-top: 20px;
 		}
 	</style>
-	
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
 <fieldset>
 	<legend>Add Menu</legend>
-	
+
 	<form action="php_action/create.php" method="post">
 		<table cellspacing="0" cellpadding="0">
 			<tr>
@@ -47,7 +53,7 @@
 			</tr>
 		</table>
 	</form>
-	
+
 </fieldset>
 
 </body>

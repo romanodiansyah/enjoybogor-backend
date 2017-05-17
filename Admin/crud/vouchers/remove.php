@@ -2,21 +2,24 @@
 
 require_once '../../../connect/db_connect.php';
 
-if($_GET['voucher_id'])
-{
-	$voucher_id = $_GET['voucher_id'];
-	
-	$sql = "SELECT * FROM vouchers WHERE voucher_id = {$voucher_id}";
-	$result = $connect->query($sql);
-	$data = $result->fetch_assoc();
-	
-	$connect->close();
-?>
+if ($_GET['voucher_id']) {
+    $voucher_id = $_GET['voucher_id'];
+
+    $sql = "SELECT * FROM vouchers WHERE voucher_id = {$voucher_id}";
+    $result = $connect->query($sql);
+    $data = $result->fetch_assoc();
+
+    $connect->close(); ?>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Delete User</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -32,5 +35,6 @@ if($_GET['voucher_id'])
 </html>
 
 <?php
+
 }
 ?>

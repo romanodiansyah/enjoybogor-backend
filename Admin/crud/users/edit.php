@@ -2,23 +2,21 @@
 
 require_once '../../../connect/db_connect.php';
 
-if($_GET['user_id'])
-{
-	$user_id = $_GET['user_id'];
-	
-	$sql = "SELECT * FROM users WHERE user_id = {$user_id}";
-	$result = $connect->query($sql);
-	
-	$data = $result->fetch_assoc();
-	
-	$connect->close();
-?>
+if ($_GET['user_id']) {
+    $user_id = $_GET['user_id'];
+
+    $sql = "SELECT * FROM users WHERE user_id = {$user_id}";
+    $result = $connect->query($sql);
+
+    $data = $result->fetch_assoc();
+
+    $connect->close(); ?>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Edit User</title>
-		
+
 		<style type="text/css">
 			fieldset
 			{
@@ -26,18 +24,23 @@ if($_GET['user_id'])
 				margin-top: 100px
 				width: 50%
 			}
-			
+
 			table tr th
 			{
 				padding-top: 20px;
 			}
 		</style>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
 <fieldset>
 	<legend>Edit User</legend>
-	
+
 	<form action="php_action/update.php" method="post">
 		<table cellspacing="0" cellpadding="0">
 			<tr>
@@ -67,12 +70,13 @@ if($_GET['user_id'])
 			</tr>
 		</table>
 	</form>
-	
+
 </fieldset>
 
 </body>
 </html>
 
 <?php
+
 }
 ?>

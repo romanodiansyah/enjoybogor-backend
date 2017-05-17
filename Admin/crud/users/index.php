@@ -4,21 +4,25 @@
 <html>
 <head>
 	<title>Enjoy Bogor</title>
-	
+
 	<style type="text/css">
 		.manageMember
 		{
 			width: 50%;
 			margin: auto;
 		}
-		
+
 		table
 		{
 			width: 100%;
 			margin-top: 20px;
 		}
 	</style>
-	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -36,14 +40,12 @@
 		</thead>
 		<tbody>
 			<?php
-			$sql = "SELECT * FROM users WHERE active = 1";
-			$result = $connect->query($sql);
-			
-			if($result->num_rows >0)
-			{
-				while($row = $result->fetch_assoc())
-				{
-					echo "
+            $sql = "SELECT * FROM users WHERE active = 1";
+            $result = $connect->query($sql);
+
+            if ($result->num_rows >0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "
 					<tr>
 						<td> ".$row['user_name']."</td>
 						<td> ".$row['username']."</td>
@@ -54,13 +56,11 @@
 							<a href='remove.php?user_id=".$row['user_id']."'><button type='button'>Remove</button></a>
 						</td>
 					</tr>";
-				}
-			}
-				else
-				{
-					echo "<tr><td colspan='5'><center>No Data Available</center></td></tr>";
-				}
-			?>
+                }
+            } else {
+                    echo "<tr><td colspan='5'><center>No Data Available</center></td></tr>";
+                }
+            ?>
 		</tbody>
 	</table>
 </div>
