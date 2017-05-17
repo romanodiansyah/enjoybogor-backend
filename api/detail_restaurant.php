@@ -17,8 +17,9 @@ include '../connect/db_connect.php';
   $restaurant_contact=$hasil["restaurant_contact"];
   $restaurant_address=$hasil["restaurant_address"];
   $restaurant_category=$hasil["restaurant_category"];
+  $image=$hasil["image"];
   $status =0;
 
 $back= array();
-  $back[] = array("restaurant_name"=>$restaurant_name, "restaurant_description"=>$restaurant_description, "restaurant_contact"=>$restaurant_contact,"restaurant_address"=>$restaurant_address ,"restaurant_category"=>$restaurant_category  );
+  $back[] = array("restaurant_name"=>$restaurant_name, "restaurant_description"=>$restaurant_description, "restaurant_contact"=>$restaurant_contact,"restaurant_address"=>$restaurant_address ,"restaurant_category"=>$restaurant_category ,"image"=>$image );
   echo json_encode($back);
