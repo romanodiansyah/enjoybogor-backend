@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2017 at 10:53 AM
+-- Generation Time: May 17, 2017 at 09:57 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -92,18 +92,19 @@ CREATE TABLE `restaurants` (
   `latitude` double NOT NULL DEFAULT '0',
   `longitude` double NOT NULL DEFAULT '0',
   `active` int(11) NOT NULL DEFAULT '0',
-  `user` int(11) NOT NULL DEFAULT '0'
+  `user` int(11) NOT NULL DEFAULT '0',
+  `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data for table `restaurants`
 --
 
-INSERT INTO `restaurants` (`restaurant_id`, `restaurant_name`, `restaurant_address`, `restaurant_category`, `restaurant_contact`, `restaurant_description`, `latitude`, `longitude`, `active`, `user`) VALUES
-(-1, 'Tidak Ada Restaurant', '-', 'none', 0, '-', 0, 0, 0, 0),
-(5, 'test', 'lagi', 'terus', 7812, 'tes', 0, 0, 2, 0),
-(6, 'tes1', 'tes1', 'tes1', 0, 'tes1', 0, 0, 0, 0),
-(8, 'tes1', 'tes1', 'tes1', 251, 'tes1', 0, 0, 2, 0);
+INSERT INTO `restaurants` (`restaurant_id`, `restaurant_name`, `restaurant_address`, `restaurant_category`, `restaurant_contact`, `restaurant_description`, `latitude`, `longitude`, `active`, `user`, `image`) VALUES
+(-1, 'Tidak Ada Restaurant', '-', 'none', 0, '-', 0, 0, 0, 0, ''),
+(5, 'test', 'lagi', 'terus', 7812, 'tes', 0, 0, 2, 0, ''),
+(6, 'tes1', 'tes1', 'tes1', 0, 'tes1', 0, 0, 0, 0, ''),
+(8, 'tes1', 'tes1', 'tes1', 251, 'tes1', 0, 0, 2, 0, '');
 
 -- --------------------------------------------------------
 
