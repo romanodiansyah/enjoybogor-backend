@@ -18,6 +18,7 @@
  $user_id = $row['user_id'];
  $_SESSION['user_id'] = $user_id;
  $_SESSION['username'] = $username;
+ $_SESSION['points'] = $row['points'];
  header("location:../home.php"); // jika berhasil login, maka masuk ke file home.php
  }
  else {

@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../../connect/db_connect.php';
+require_once '../../../../connect/db_connect.php';
 
 session_start();
 $user_id = $_SESSION['user_id'];
