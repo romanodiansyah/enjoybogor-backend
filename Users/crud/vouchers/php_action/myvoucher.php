@@ -1,4 +1,4 @@
-<?php require_once '../../../connect/db_connect.php'; ?>
+<?php require_once '../../../../connect/db_connect.php'; ?>
 
 
 <!DOCTYPE html>
@@ -24,6 +24,7 @@
 <body>
 
 <div class="manageMember">
+	<a href="../index.php"><button type="button">Back</button></a>
 	<a href="../../../home.php"><button type="button">Home</button></a>
 	<table border="1" cellspacing="0" cellpadding="0">
 		<thead>

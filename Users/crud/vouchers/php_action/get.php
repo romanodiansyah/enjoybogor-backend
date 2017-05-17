@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../../connect/db_connect.php';
+require_once '../../../../connect/db_connect.php';
 
 session_start();
 $user_id = $_SESSION['user_id'];
@@ -40,7 +40,7 @@ if($_GET['voucher_id'])
 				$sql = "UPDATE users SET points='$points' WHERE user_id={$user_id}";
 				if($connect->query($sql) === TRUE)
 				{
-					echo "<a href='../../../../home.php'><button type='button'>Home</button></a>";
+					echo "<a href='myvoucher.php'><button type='button'>My voucher</button></a>";
 				}
 				else
 				{
@@ -55,8 +55,7 @@ if($_GET['voucher_id'])
 		else
 		{
 			echo "point anda tidak mencukupi !";
-		}
-		
+		}	
 	}
 }
 ?>
