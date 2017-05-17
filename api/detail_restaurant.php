@@ -1,9 +1,9 @@
 <?php
 
 include '../connect/db_connect.php';
-$json_input_data=json_decode(file_get_contents('php://input'), true);
+// $json_input_data=json_decode(file_get_contents('php://input'), true);
 
-    $restaurant_id=$json_input_data["restaurant_id"];
+    $restaurant_id=$_GET["id"];
     $ql= "SELECT * FROM restaurants WHERE restaurant_id='$restaurant_id' AND active=2";
     $queri = $connect->query($ql);
     $hasil = $queri->fetch_assoc();
@@ -18,13 +18,7 @@ $json_input_data=json_decode(file_get_contents('php://input'), true);
   $restaurant_address=$hasil["restaurant_address"];
   $restaurant_category=$hasil["restaurant_category"];
   $status =0;
-$data = array();
-        if ($result->num_rows >0) {
-            while ($row = $result->fetch_assoc()) {
-                $status =1;
-                $data[]=array("menu_id"=>$row['menu_id'], "food_name"=>$row['food_name'],"price"=> $row['price'], "portion_size"=>$row['portion_size'], "menu_description"=>$row['menu_description']);
-            }
-        }
 
-  $back = array("restaurant_name"=>$restaurant_name, "restaurant_description"=>$restaurant_description, "restaurant_contact"=>$restaurant_contact,"restaurant_address"=>$restaurant_address ,"restaurant_category"=>$restaurant_category  );
+$back= array();
+  $back[] = array("restaurant_name"=>$restaurant_name, "restaurant_description"=>$restaurant_description, "restaurant_contact"=>$restaurant_contact,"restaurant_address"=>$restaurant_address ,"restaurant_category"=>$restaurant_category  );
   echo json_encode($back);

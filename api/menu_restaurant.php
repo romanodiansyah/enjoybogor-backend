@@ -1,9 +1,8 @@
 <?php
 
 include '../connect/db_connect.php';
-$json_input_data=json_decode(file_get_contents('php://input'), true);
 
-    $restaurant_id=$json_input_data["restaurant_id"];
+    $restaurant_id=$_GET["id"];
     $ql= "SELECT * FROM restaurants WHERE restaurant_id='$restaurant_id' AND active=2";
     $queri = $connect->query($ql);
     $hasil = $queri->fetch_assoc();
