@@ -37,6 +37,8 @@
 </div>
 <?php 
 	echo "<h1>$hasil[restaurant_name]</br></h1>";
+	$rataan=$hasil['sumrating']/$hasil['counterrating'];
+	echo "<h1>$rataan</br></h1>";
 	echo "$hasil[restaurant_description]";
 ?>
 	<table border="1" cellspacing="0" cellpadding="0">
