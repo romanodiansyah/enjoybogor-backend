@@ -37,6 +37,8 @@
 </div>
 <?php 
 	echo "<h1>$hasil[restaurant_name]</br></h1>";
+	$rataan=$hasil['sumrating']/$hasil['counterrating'];
+	echo "<h1>$rataan</br></h1>";
 	echo "$hasil[restaurant_description]";
 ?>
 	<table border="1" cellspacing="0" cellpadding="0">
@@ -92,7 +94,9 @@
 					<tbody>
 						<tr>
 							<td><center><?php echo $akhir['user_name'];?></center></td>
-							<td><?php echo "nanti bintang disini"?></td>
+						</tr>
+						<tr>
+							<td colspan='2'><?php echo "".$row['rating']."";?></td>
 						</tr>
 						<tr>
 							<td colspan='2'><center><?php echo "".$row['comment']."";?></center></td>
@@ -106,7 +110,25 @@
 						<tr><td colspan='2'><center>No Comments Available</center></td></tr>
 					</tbody>
 				</table>
-		<?php } ?>
+		<?php } ?>	
+<fieldset>
+	<form action="../php_action/commentrate.php" method="post">
+		<table cellspacing="0" cellpadding="0">
+			<tr>
+				<th>Rate</th>
+				<td><input type="text" name="rate" placeholder="rate" /></td>
+			</tr>
+			<tr>
+				<th>Comment</th>
+				<td><textarea name="comment" placeholder="comment" /></textarea></td>
+			</tr>
+			<tr>
+				<input type="hidden" name="restaurant_id" value="<?php echo $restaurant_id?>"/>
+				<td><button type="submit">Send</button></td>
+			</tr>
+		</table>
+	</form>
+</fieldset>
 			
 </body>
 </html>
