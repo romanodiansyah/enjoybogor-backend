@@ -7,7 +7,7 @@ $dbname = "enjoybogor_data";
 
 	// buat koneksi
 	$connect = new mysqli($localhost,$username,$password,$dbname);
-	
+
 	// cek koneksi
 	if($connect->connect_error)
 	{
@@ -17,5 +17,5 @@ $dbname = "enjoybogor_data";
 	{
 		// echo "Sucsessfully Connected";
 	}
-	
+
 ?>
