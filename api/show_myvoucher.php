@@ -1,7 +1,8 @@
 <?php
 include '../connect/db_connect.php';
 
-$user_id = $_GET["id"];
+$json_input_data=json_decode(file_get_contents('php://input'), true);
+$user_id = $json_input_data['id'];
 $sql = "SELECT * FROM vouchers V JOIN assoc A WHERE V.voucher_id = A.voucher_id AND A.active = 1 AND A.user_id = {$user_id} ";
 $result = $connect->query($sql);
 $data = array();
