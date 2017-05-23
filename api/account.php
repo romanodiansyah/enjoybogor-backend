@@ -20,8 +20,8 @@ $username=$json_input_data['username'];
             $contact= $row['user_contact'];
             $points = $row['points'];
         }
-    if ($nama==null & $email==null) {
-        echo json_encode(array('status' => false, 'message' => 'username or password error'));
+    if ($nama==null) {
+        echo json_encode(array('status' => false, 'message' => 'username error'));
         return;
     }
 
