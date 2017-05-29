@@ -3,7 +3,7 @@ include '../connect/db_connect.php';
 
 $json_input_data=json_decode(file_get_contents('php://input'), true);
 $voucher_id = $json_input_data['voucher_id'];
-$voucher_id = $json_input_data['user_id'];
+$user_id = $json_input_data['user_id'];
 
 	$perintah = "select * FROM assoc WHERE user_id = '$user_id' AND voucher_id = '$voucher_id' ";
 	$hasil = mysqli_query($connect,$perintah);

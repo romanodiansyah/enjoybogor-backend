@@ -5,7 +5,7 @@ include '../connect/db_connect.php';
 
 
 $json_input_data=json_decode(file_get_contents('php://input'), true);
-$username=$json_input_data['username'];
+$username=strtoupper($json_input_data['username']);
 $password=hash('sha256', $json_input_data['password']);
 
 
@@ -27,14 +27,14 @@ if (isset($username) && isset($password)) {
         return;
     }
     $key = "eenjoy";//key
-    $token = $id.$nama.$keterangan . time().$key;
+    $token_format = $id.$nama.$keterangan . time().$key;
 
 
-    $jwt = hash('sha256', $token);
+    $token = hash('sha256', $token);
     //echo "  token= ".$token;
 
     header('Content-type: application/json');
-    echo json_encode(array('status' => true, 'token' => $jwt, 'name' => $nama, 'id' => $id, 'email'=>$email, 'username'=>$username,'contact'=>$contact , 'points'=> $points ));
+    echo json_encode(array('status' => true, 'token' => $token, 'name' => $nama, 'id' => $id, 'email'=>$email, 'username'=>$username,'contact'=>$contact , 'points'=> $points ));
 } else {
     // header('Content-type: application/json');
     echo json_encode(array('status' => false, 'message' => 'please fill username and password'));
