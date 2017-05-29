@@ -1,11 +1,18 @@
 <?php
+ session_start();
+ if (empty($_SESSION['user_id'])) {
+	header("location:../commonfunction/login/login.php"); // jika belum login, maka dikembalikan ke file form_login.php
+ }
+ else {
+ ?>
+<?php
 
 require_once '../../../connect/db_connect.php';
 
 if ($_GET['menu_id']) {
     $menu_id = $_GET['menu_id'];
 
-    $sql = "SELECT * FROM menus WHERE menu_id = {$menu_id}";
+    $sql = "SELECT food_name,price,portion_size,menu_description,menu_id FROM menus WHERE menu_id = {$menu_id}";
     $result = $connect->query($sql);
 
     $data = $result->fetch_assoc();
@@ -74,5 +81,5 @@ if ($_GET['menu_id']) {
 
 <?php
 
-}
+ }}
 ?>

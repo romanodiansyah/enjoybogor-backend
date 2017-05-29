@@ -30,6 +30,7 @@
 		<thead>
 			<tr>
 				<th>Voucher Name</th>
+				<th>Image</th>
 				<th>Action !</th>
 			</tr>
 		</thead>
@@ -46,6 +47,7 @@
 					echo "
 					<tr>
 						<td> ".$row['voucher_name']."</td>
+						<td> <img src='../../../../Admin/crud/vouchers/images/".$row['image']."' width='100' height='70'> </td>
 						<td>
 							<a href='use.php?voucher_id=".$row['voucher_id']."'><button type='button'>Use it !</button></a>
 						</td>

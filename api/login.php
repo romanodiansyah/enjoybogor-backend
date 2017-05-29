@@ -27,14 +27,14 @@ if (isset($username) && isset($password)) {
         return;
     }
     $key = "eenjoy";//key
-    $token_format = $id.$nama.$keterangan . time().$key;
+    $token = $id.$nama.$keterangan . time().$key;
 
 
-    $token = hash('sha256', $token_format);
+    $jwt = hash('sha256', $token);
     //echo "  token= ".$token;
 
     header('Content-type: application/json');
-    echo json_encode(array('status' => true, 'token' => $token, 'name' => $nama, 'id' => $id, 'email'=>$email, 'username'=>$username,'contact'=>$contact , 'points'=> $points ));
+    echo json_encode(array('status' => true, 'token' => $jwt, 'name' => $nama, 'id' => $id, 'email'=>$email, 'username'=>$username,'contact'=>$contact , 'points'=> $points ));
 } else {
     // header('Content-type: application/json');
     echo json_encode(array('status' => false, 'message' => 'please fill username and password'));

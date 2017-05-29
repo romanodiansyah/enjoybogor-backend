@@ -1,3 +1,10 @@
+<?php
+ session_start();
+ if (empty($_SESSION['user_id'])) {
+	header("location:../commonfunction/login/login.php"); // jika belum login, maka dikembalikan ke file form_login.php
+ }
+ else {
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +34,7 @@
 <fieldset>
 	<legend>Add Voucher</legend>
 
-	<form action="php_action/create.php" method="post">
+	<form action="php_action/create.php" enctype="multipart/form-data" method="post">
 		<table cellspacing="0" cellpadding="0">
 			<tr>
 				<th>Voucher Name</th>
@@ -35,7 +42,7 @@
 			</tr>
 			<tr>
 				<th>Points</th>
-				<td><input type="text" name="points_needed" placeholder="Points"/></td>
+				<td><input type="number" name="points_needed" placeholder="Points"/></td>
 			</tr>
 			<tr>
 				<th>Type</th>
@@ -44,6 +51,12 @@
 			<tr>
 				<th>Quantity</th>
 				<td><input type="number" name="quantity" placeholder="Quantity"/></td>
+			</tr>
+			<tr>
+			<th>Upload</th>
+			<td>
+				<input type="file" name="images">
+			</td>
 			</tr>
 			<tr>
 				<td><button type="submit">Create</button></td>
@@ -56,3 +69,5 @@
 
 </body>
 </html>
+
+ <?php } ?>

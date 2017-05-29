@@ -1,3 +1,10 @@
+<?php
+ session_start();
+ if (empty($_SESSION['user_id'])) {
+	header("location:../commonfunction/login/login.php"); // jika belum login, maka dikembalikan ke file form_login.php
+ }
+ else {
+ ?>
 <?php require_once '../../../connect/db_connect.php'; ?>
 
 <!DOCTYPE html>
@@ -34,6 +41,7 @@
 		<thead>
 			<tr>
 				<th>Voucher Name</th>
+				<th>Voucher</th>
 				<th>Points</th>
 				<th>Type</th>
 				<th>Quantity</th>
@@ -43,14 +51,15 @@
 		</thead>
 		<tbody>
 			<?php
-            $sql = "SELECT * FROM vouchers WHERE active = 1";
+            $sql = "SELECT voucher_name,image,points_needed,voucher_type,quantity,voucher_id FROM vouchers WHERE active = 1";
             $result = $connect->query($sql);
 
             if ($result->num_rows >0) {
                 while ($row = $result->fetch_assoc()) {
-                    echo "
+                    echo"
 					<tr>
 						<td> ".$row['voucher_name']."</td>
+						<td> <img src='images/".$row['image']."' width='100' height='70'> </td>
 						<td>".$row['points_needed']."</td>
 						<td>".$row['voucher_type']."</td>
 						<td>".$row['quantity']."</td>
@@ -71,3 +80,5 @@
 </body>
 </html>
 </html>
+
+ <?php } ?>

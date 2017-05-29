@@ -1,3 +1,10 @@
+<?php
+ session_start();
+ if (empty($_SESSION['user_id'])) {
+	header("location:../commonfunction/login/login.php"); // jika belum login, maka dikembalikan ke file form_login.php
+ }
+ else {
+ ?>
 <?php require_once '../../../connect/db_connect.php'; ?>
 
 <!DOCTYPE html>
@@ -43,7 +50,7 @@
 		</thead>
 		<tbody>
 			<?php
-            $sql = "SELECT * FROM restaurants WHERE active = 1";
+            $sql = "SELECT restaurant_name,restaurant_address,restaurant_category,restaurant_contact,restaurant_description,restaurant_id FROM restaurants WHERE active = 1";
             $result = $connect->query($sql);
 
             if ($result->num_rows >0) {
@@ -73,3 +80,4 @@
 </body>
 </html>
 </html>
+ <?php }?>

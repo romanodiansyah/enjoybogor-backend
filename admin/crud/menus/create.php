@@ -1,3 +1,11 @@
+<?php
+ session_start();
+ if (empty($_SESSION['user_id'])) {
+	header("location:../commonfunction/login/login.php"); // jika belum login, maka dikembalikan ke file form_login.php
+ }
+ else {
+	 	$restaurant_id = $_GET['restaurant_id'];
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +37,7 @@
 <fieldset>
 	<legend>Add Menu</legend>
 
-	<form action="php_action/create.php" method="post">
+	<form action="php_action/create.php" enctype="multipart/form-data" method="post">
 		<table cellspacing="0" cellpadding="0">
 			<tr>
 				<th>Food Name</th>
@@ -47,7 +55,20 @@
 				<th>Description</th>
 				<td><input type="textbox" name="menu_description" placeholder="Description" /></td>
 			</tr>
+      <tr>
+  			<th>Upload 1</th>
+  			<td>
+  				<input type="file" name="image1">
+  			</td>
+  	  </tr>
+      <tr>
+  			<th>Upload 2</th>
+  			<td>
+  				<input type="file" name="image2">
+  			</td>
+  	  </tr>
 			<tr>
+				<input type="hidden" name="restaurant_id" value=<?php echo "$restaurant_id";?> />
 				<td><button type="submit">Create</button></td>
 				<td><a href="index.php"><button type="button">Back</button></a></td>
 			</tr>
@@ -58,3 +79,4 @@
 
 </body>
 </html>
+ <?php }?>

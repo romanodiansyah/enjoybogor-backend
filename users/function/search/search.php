@@ -1,4 +1,11 @@
 <?php
+ session_start();
+ if (empty($_SESSION['user_id'])) {
+	header("location:../commonfunction/login/login.php"); // jika belum login, maka dikembalikan ke file form_login.php
+ }
+ else {
+ ?>
+<?php
 
 require_once '../../../connect/db_connect.php';
 ?>
@@ -34,7 +41,7 @@ require_once '../../../connect/db_connect.php';
 			</tr>
 			<tr>
 				<td><button type="submit">Search</button></td>
-				<td><a href="index.php"><button type="button">Back</button></a></td>
+				<td><a href="../../../home.php"><button type="button">Back</button></a></td>
 			</tr>
 		</table>
 	</form>
@@ -43,4 +50,4 @@ require_once '../../../connect/db_connect.php';
 
 </body>
 </html>
-
+<?php } ?>

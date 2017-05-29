@@ -1,3 +1,10 @@
+<?php
+ session_start();
+ if (empty($_SESSION['user_id'])) {
+	header("location:../commonfunction/login/login.php"); // jika belum login, maka dikembalikan ke file form_login.php
+ }
+ else {
+ ?>
 <?php require_once '../../../../connect/db_connect.php'; 
 	$restaurant_id=$_GET['restaurant_id'];
 	$ql= "SELECT * FROM restaurants WHERE restaurant_id='$restaurant_id' AND active=2";
@@ -34,11 +41,19 @@
 <div class="manageMember">
 	<a href="../../../home.php"><button type="button">Home</button></a>
 	<a href="../index.php"><button type="button">Back</button></a>
+	<a href='upload.php?restaurant_id=<?php  echo "$restaurant_id"; ?>'><button type="button">Add Photo</button></a>
 </div>
 <?php 
 	echo "<h1>$hasil[restaurant_name]</br></h1>";
-	$rataan=$hasil['sumrating']/$hasil['counterrating'];
-	echo "<h1>$rataan</br></h1>";
+	echo "<img src='../../../../restaurant_image/".$hasil['image']."' width='200' height='110'><br>";
+	?>
+	<a href='moreimage.php?restaurant_id=<?php  echo "$restaurant_id"; ?>'><button type="button">More Images</button></a>
+	<?php
+	if($hasil['counterrating']>0)
+	{
+		$rataan=$hasil['sumrating']/$hasil['counterrating'];		
+		echo "<h1>$rataan</br></h1>";		
+	}
 	echo "$hasil[restaurant_description]";
 ?>
 	<table border="1" cellspacing="0" cellpadding="0">
@@ -116,7 +131,7 @@
 		<table cellspacing="0" cellpadding="0">
 			<tr>
 				<th>Rate</th>
-				<td><input type="text" name="rate" placeholder="rate" /></td>
+				<td><input type="text" name="rating" placeholder="rate" /></td>
 			</tr>
 			<tr>
 				<th>Comment</th>
@@ -133,3 +148,4 @@
 </body>
 </html>
 </html>
+ <?php } ?>

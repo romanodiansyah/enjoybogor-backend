@@ -23,8 +23,8 @@
 <body>
 
 <div class="manageMember">
-	<a href="create.php"><button type="button">Add Member</button></a>
-	<a href="../../home.php"><button type="button">Home</button></a>
+	<a href="../../../../home.php"><button type="button">Home</button></a>
+	<a href="../search.php"><button type="button">Back</button></a>
 	<table border="1" cellspacing="0" cellpadding="0">
 		<thead>
 			<tr>
@@ -37,7 +37,61 @@
 		<tbody>
 			<?php
 			$search = $_POST['search'];
-			$sql = "SELECT 'schema_name' FROM information_schema.schemata WHERE schema_name LIKE '%".$search."%' ";
+			if($connect->query("SELECT * FROM menus WHERE food_name LIKE '%".$search."%' || menu_description LIKE '%".$search."%'")->num_rows >0 AND $connect->query("SELECT * FROM restaurants WHERE restaurant_name LIKE '%".$search."%' || restaurant_address LIKE '%".$search."%' || 
+						restaurant_category LIKE '%".$search."%' || restaurant_contact LIKE '%".$search."%' || restaurant_description LIKE '%".$search."%'")->num_rows >0) {
+			$sql = 
+			"
+				(SELECT * from
+						(SELECT DISTINCT restaurant_id FROM menus WHERE food_name LIKE '%".$search."%' || menu_description LIKE '%".$search."%') 
+					M JOIN 
+						(SELECT * FROM restaurants) 
+					R ON M.restaurant_id=R.restaurant_id)
+				UNION
+				(SELECT * from 
+						(SELECT DISTINCT restaurant_id FROM menus WHERE food_name LIKE '%".$search."%' || menu_description LIKE '%".$search."%') 
+					M JOIN 
+						(SELECT * FROM restaurants WHERE restaurant_name LIKE '%".$search."%' || restaurant_address LIKE '%".$search."%' || 
+						restaurant_category LIKE '%".$search."%' || restaurant_contact LIKE '%".$search."%' || restaurant_description LIKE '%".$search."%') 
+					R ON not M.restaurant_id=R.restaurant_id)
+			";}
+			if($connect->query("SELECT * FROM menus WHERE food_name LIKE '%".$search."%' || menu_description LIKE '%".$search."%'")->num_rows <1 AND $connect->query("SELECT * FROM restaurants WHERE restaurant_name LIKE '%".$search."%' || restaurant_address LIKE '%".$search."%' || 
+						restaurant_category LIKE '%".$search."%' || restaurant_contact LIKE '%".$search."%' || restaurant_description LIKE '%".$search."%'")->num_rows >0) {
+
+			$sql = 
+			"
+				SELECT * FROM restaurants WHERE restaurant_name LIKE '%".$search."%' || restaurant_address LIKE '%".$search."%' || 
+						restaurant_category LIKE '%".$search."%' || restaurant_contact LIKE '%".$search."%' || restaurant_description LIKE '%".$search."%'
+			";}
+			if($connect->query("SELECT * FROM menus WHERE food_name LIKE '%".$search."%' || menu_description LIKE '%".$search."%'")->num_rows >0 AND $connect->query("SELECT * FROM restaurants WHERE restaurant_name LIKE '%".$search."%' || restaurant_address LIKE '%".$search."%' || 
+						restaurant_category LIKE '%".$search."%' || restaurant_contact LIKE '%".$search."%' || restaurant_description LIKE '%".$search."%'")->num_rows <1) {
+
+			$sql = 
+			"
+				(SELECT * from
+						(SELECT DISTINCT restaurant_id FROM menus WHERE food_name LIKE '%".$search."%' || menu_description LIKE '%".$search."%') 
+					M JOIN 
+						(SELECT * FROM restaurants) 
+					R ON M.restaurant_id=R.restaurant_id)
+			";}
+			if($connect->query("SELECT * FROM menus WHERE food_name LIKE '%".$search."%' || menu_description LIKE '%".$search."%'")->num_rows <1 AND $connect->query("SELECT * FROM restaurants WHERE restaurant_name LIKE '%".$search."%' || restaurant_address LIKE '%".$search."%' || 
+						restaurant_category LIKE '%".$search."%' || restaurant_contact LIKE '%".$search."%' || restaurant_description LIKE '%".$search."%'")->num_rows <1) {
+
+			$sql = 
+			"
+				(SELECT * from 
+						(SELECT * FROM menus WHERE food_name LIKE '%".$search."%' || menu_description LIKE '%".$search."%') 
+					M JOIN 
+						(SELECT * FROM restaurants WHERE restaurant_name LIKE '%".$search."%' || restaurant_address LIKE '%".$search."%' || 
+						restaurant_category LIKE '%".$search."%' || restaurant_contact LIKE '%".$search."%' || restaurant_description LIKE '%".$search."%') 
+					R ON M.restaurant_id!=R.restaurant_id)
+				UNION ALL
+				(SELECT * from 
+						(SELECT * FROM menus WHERE food_name LIKE '%".$search."%' || menu_description LIKE '%".$search."%') 
+					M JOIN 
+						(SELECT * FROM restaurants WHERE restaurant_name LIKE '%".$search."%' || restaurant_address LIKE '%".$search."%' || 
+						restaurant_category LIKE '%".$search."%' || restaurant_contact LIKE '%".$search."%' || restaurant_description LIKE '%".$search."%') 
+					R ON M.restaurant_id=R.restaurant_id)
+			";}
 			$result = $connect->query($sql);
 			
 			if($result->num_rows >0)
@@ -46,7 +100,7 @@
 				{
 					echo "
 					<tr>
-						<td> ".$row['restaurant_name']."</td>
+						<td><a href='../../../crud/restaurants/restaurant/index.php?restaurant_id=".$row['restaurant_id']."'> ".$row['restaurant_name']."</td>
 						<td> ".$row['restaurant_address']."</td>
 						<td>".$row['restaurant_category']."</td>
 						<td>".$row['restaurant_contact']."</td>

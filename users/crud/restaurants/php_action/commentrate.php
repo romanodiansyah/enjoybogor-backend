@@ -7,7 +7,7 @@ $user_id = $_SESSION['user_id'];
 
 	$restaurant_id = $_POST['restaurant_id'];
 	$comment = $_POST['comment'];
-	$rate = $_POST['rate'];
+	$rate = $_POST['rating'];
 	$perintah = "select * from ratings_and_comments WHERE user_id = '$user_id' AND restaurant_id = '$restaurant_id' ";
 	$hasil = $connect->query($perintah);
 	if ($hasil->num_rows > 0) {
@@ -29,7 +29,7 @@ $user_id = $_SESSION['user_id'];
 		if($connect->query($sql) === TRUE)
 		{
 			echo "<p> Succsessfull ! </p>";
-			echo "<a href='../restaurant/index.php'><button type='button'>Back</button></a>";
+			echo "<a href='../restaurant/index.php?restaurant_id=$restaurant_id'><button type='button'>Back</button></a>";
 		}
 		else
 		{

@@ -2,6 +2,8 @@
 //todo: give filter, where;
 include '../connect/db_connect.php';
 
+$sql = "SELECT * FROM restaurants";
+$result = $connect->query($sql);
 $limit = $_GET['limit'];
 
 $data = array();
@@ -12,11 +14,11 @@ $result = $connect->query($sql);
 
 if ($result->num_rows >0) {
     while ($row = $result->fetch_assoc()) {
-        $data[]=array("name"=>$row['restaurant_name'], "address" =>$row['restaurant_address'], "category"=> $row['restaurant_category'], "contact"=>  $row['restaurant_contact'],"description"=> $row['restaurant_description'],"restaurant_id"=>$row['restaurant_id'],"image"=>$row['image']);
+        $data[]=array("name"=>$row['restaurant_name'], "address" =>$row['restaurant_address'], "category"=> $row['restaurant_category'], "contact"=>  $row['restaurant_contact'],"description"=> $row['restaurant_description'],"restaurant_id"=>$row['restaurant_id']);
     }
     echo json_encode($data);
 } else {
-    echo '[{"name":"no data yet"}]';
+    echo "no data";
 }
 
 

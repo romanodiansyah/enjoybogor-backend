@@ -1,11 +1,18 @@
 <?php
+ session_start();
+ if (empty($_SESSION['user_id'])) {
+	header("location:../commonfunction/login/login.php"); // jika belum login, maka dikembalikan ke file form_login.php
+ }
+ else {
+ ?>
+<?php
 
 require_once '../../../connect/db_connect.php';
 
 if ($_GET['user_id']) {
     $user_id = $_GET['user_id'];
 
-    $sql = "SELECT * FROM users WHERE user_id = {$user_id}";
+    $sql = "SELECT user_name,username,user_contact,email,password,user_id FROM users WHERE user_id = {$user_id}";
     $result = $connect->query($sql);
 
     $data = $result->fetch_assoc();
@@ -77,6 +84,6 @@ if ($_GET['user_id']) {
 </html>
 
 <?php
-
+}
 }
 ?>

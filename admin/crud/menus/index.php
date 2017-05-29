@@ -1,3 +1,10 @@
+<?php
+ session_start();
+ if (empty($_SESSION['user_id'])) {
+	header("location:../commonfunction/login/login.php"); // jika belum login, maka dikembalikan ke file form_login.php
+ }
+ else {
+ ?>
 <?php require_once '../../../connect/db_connect.php'; ?>
 
 <!DOCTYPE html>
@@ -28,16 +35,18 @@
 <body>
 
 <div class="manageMember">
-	<a href="create.php"><button type="button">Add Menu</button></a>
 	<a href="../../home.php"><button type="button">Home</button></a>
 	<a href="needapprove.php"><button type="button">Need Approve</button></a>
 	<table border="1" cellspacing="0" cellpadding="0">
 		<thead>
 			<tr>
 				<th>Food Name</th>
+				<th>Image 1</th>
+				<th>Image 2</th>
 				<th>Price</th>
 				<th>Portion Size</th>
 				<th>Description</th>
+				<th>Option</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,6 +59,8 @@
                     echo "
 					<tr>
 						<td> ".$row['food_name']."</td>
+						<td> <img src='../../../menu_image/".$row['image1']."' width='100' height='70'> </td>
+						<td> <img src='../../../menu_image/".$row['image2']."' width='100' height='70'> </td>
 						<td> ".$row['price']."</td>
 						<td> ".$row['portion_size']."</td>
 						<td> ".$row['menu_description']."</td>
@@ -70,3 +81,4 @@
 </body>
 </html>
 </html>
+ <?php } ?>

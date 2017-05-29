@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 18 Mei 2017 pada 09.57
--- Versi Server: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Generation Time: May 29, 2017 at 03:17 PM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `assoc`
+-- Table structure for table `assoc`
 --
 
 CREATE TABLE `assoc` (
@@ -35,31 +35,36 @@ CREATE TABLE `assoc` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `menus`
+-- Table structure for table `menus`
 --
 
 CREATE TABLE `menus` (
-  `menu_id` int(11) NOT NULL,
   `restaurant_id` int(11) NOT NULL DEFAULT '0',
+  `menu_id` int(11) NOT NULL,
   `food_name` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
   `portion_size` tinyint(100) NOT NULL,
   `menu_description` text NOT NULL,
-  `active` int(11) NOT NULL DEFAULT '0'
+  `active` int(11) NOT NULL DEFAULT '0',
+  `image1` varchar(255) NOT NULL DEFAULT 'NULL.jpg',
+  `image2` varchar(255) NOT NULL DEFAULT 'NULL.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `menus`
+-- Dumping data for table `menus`
 --
 
-INSERT INTO `menus` (`menu_id`, `restaurant_id`, `food_name`, `price`, `portion_size`, `menu_description`, `active`) VALUES
-(-1, -1, 'Belum Ada Makanan', 0, 0, '-', 0),
-(1, 5, 'test', 10000, 4, 'enak', 2);
+INSERT INTO `menus` (`restaurant_id`, `menu_id`, `food_name`, `price`, `portion_size`, `menu_description`, `active`, `image1`, `image2`) VALUES
+(-1, -1, 'Belum Ada Makanan', 0, 0, '-', 0, 'NULL', 'NULL'),
+(5, 1, 'test', 10000, 4, 'enak', 2, 'NULL', 'NULL'),
+(5, 2, 'zul', 0, 10, 'zul bakar', 2, 'NULL', 'NULL'),
+(11, 4, 'goyang ipul', 0, 0, '-', 2, 'NULL', 'NULL'),
+(5, 5, 'Zul', 2, 2, 'zul', 1, 'NULL', 'NULL');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ratings_and_comments`
+-- Table structure for table `ratings_and_comments`
 --
 
 CREATE TABLE `ratings_and_comments` (
@@ -70,18 +75,19 @@ CREATE TABLE `ratings_and_comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `ratings_and_comments`
+-- Dumping data for table `ratings_and_comments`
 --
 
 INSERT INTO `ratings_and_comments` (`user_id`, `restaurant_id`, `comment`, `rating`) VALUES
 (12, 5, 'test comment', 3),
-(14, 8, 'aha', 1),
-(14, 5, 'coba dulu', 12);
+(17, 5, 'coba\r\n', 3),
+(12, 8, 'test', 3),
+(17, 8, 'test', 3);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `restaurants`
+-- Table structure for table `restaurants`
 --
 
 CREATE TABLE `restaurants` (
@@ -94,26 +100,51 @@ CREATE TABLE `restaurants` (
   `latitude` double NOT NULL DEFAULT '0',
   `longitude` double NOT NULL DEFAULT '0',
   `active` int(11) NOT NULL DEFAULT '0',
-  `user` int(11) NOT NULL DEFAULT '0',
-  `image` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT '-1',
+  `image` varchar(255) NOT NULL DEFAULT 'NULL',
   `sumrating` int(11) NOT NULL DEFAULT '0',
   `counterrating` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `restaurants`
+-- Dumping data for table `restaurants`
 --
 
-INSERT INTO `restaurants` (`restaurant_id`, `restaurant_name`, `restaurant_address`, `restaurant_category`, `restaurant_contact`, `restaurant_description`, `latitude`, `longitude`, `active`, `user`, `image`, `sumrating`, `counterrating`) VALUES
-(-1, 'Tidak Ada Restaurant', '-', 'none', 0, '-', 0, 0, 0, 0, '', 0, 0),
-(5, 'test', 'lagi', 'terus', 7812, 'tes', 0, 0, 2, 0, '', 14, 3),
-(6, 'tes1', 'tes1', 'tes1', 0, 'tes1', 0, 0, 0, 0, '', 0, 0),
-(8, 'tes1', 'tes1', 'tes1', 251, 'tes1', 0, 0, 2, 0, '', 0, 0);
+INSERT INTO `restaurants` (`restaurant_id`, `restaurant_name`, `restaurant_address`, `restaurant_category`, `restaurant_contact`, `restaurant_description`, `latitude`, `longitude`, `active`, `user_id`, `image`, `sumrating`, `counterrating`) VALUES
+(-1, 'Tidak Ada Restaurant', '-', 'none', 0, '-', 0, 0, 0, 0, '', 0, 1),
+(5, 'test', 'lagi', 'terus', 7812, 'tes', 0, 0, 2, 0, '', 3, 3),
+(6, 'tes1', 'tes1', 'tes1', 0, 'tes1', 0, 0, 0, 0, '', 0, 1),
+(8, 'tes1', 'tes1', 'tes1', 251, 'tes1', 0, 0, 2, 0, '', 6, 3),
+(9, 'Ayam Geprek', 'Jl Dramaga', 'Ayam', 6253, 'Ayam geprek pejuang bisa deliv order gratis looo', 0, 0, 0, -1, '', 0, 0),
+(10, 'Kentaki Fred Ciken', 'Jl Pajajaran', 'Ayam', 251, 'kulit ayamnya enak, kalo mau makan bareng zul biar dapet kulit extra', 0, 0, 0, -1, 'NULL', 0, 0),
+(11, 'Tampomas', 'Jl Dramaga', 'mie', 2513, 'warung tegal', 0, 0, 2, 18, 'NULL', 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `restaurants_images`
+--
+
+CREATE TABLE `restaurants_images` (
+  `image_id` int(11) NOT NULL,
+  `restaurant_id` int(11) NOT NULL DEFAULT '-1',
+  `image` varchar(11) NOT NULL DEFAULT 'NULL',
+  `user_id` int(11) NOT NULL DEFAULT '-1',
+  `active` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `restaurants_images`
+--
+
+INSERT INTO `restaurants_images` (`image_id`, `restaurant_id`, `image`, `user_id`, `active`) VALUES
+(1, 5, '1494776770_', -1, 1),
+(2, 5, '1494776770_', -1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -125,23 +156,27 @@ CREATE TABLE `users` (
   `user_contact` bigint(13) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `active` int(11) NOT NULL DEFAULT '0'
+  `active` int(11) NOT NULL DEFAULT '0',
+  `image` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `user_name`, `date_signup`, `points`, `user_contact`, `email`, `password`, `active`) VALUES
-(-1, 'admin', 'Admin', '2017-05-07 13:50:50', 0, 0, 'admin@enjoybogor.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 1),
-(12, 'jodhi', 'jodhi', '2017-05-13 07:03:11', 0, 4546, 'jodhi@gmail.com', '53cad8e01bd4376c3c75f202a38176ecb23b73d6d76abaa3784db4913539008f', 1),
-(13, 'tes1', 'tes1', '2017-05-16 03:34:57', 0, 251, 'tes@gmail.com', '970f3fce6e109b8e83d902c4de153d8b0386f0ccba23ac71e070859d5091ff84', 1),
-(14, 'nuh', 'nuh', '2017-05-17 09:31:00', 0, 0, 'a@a', 'dcf2e01ec4ea88bf26bc8a8c0cb9d84bab12ddccd6e86be16b6ca91f489f6939', 1);
+INSERT INTO `users` (`user_id`, `username`, `user_name`, `date_signup`, `points`, `user_contact`, `email`, `password`, `active`, `image`) VALUES
+(-1, 'ADMIN', 'Admin', '2017-05-07 13:50:50', 0, 0, 'admin@enjoybogor.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 1, ''),
+(12, 'JODHI', 'jodhi', '2017-05-13 07:03:11', 0, 4546, 'jodhi@gmail.com', '53cad8e01bd4376c3c75f202a38176ecb23b73d6d76abaa3784db4913539008f', 1, '1494776770_tmp_Untitled-3.png'),
+(13, 'tes1', 'tes1', '2017-05-16 03:34:57', 0, 251, 'tes@gmail.com', '970f3fce6e109b8e83d902c4de153d8b0386f0ccba23ac71e070859d5091ff84', 1, ''),
+(14, 'Zul', 'Zulfahmi Ibnu Habibi', '2017-05-17 09:37:56', 0, 8128486, 'zul@gmail.com', '6d8b7d9bb3c616e4effbc1d6f8e65ae05f68ce0a158aeac40a7017a3afa3ebe7', 1, ''),
+(16, 'ROMANODIANSYAH', 'Mohammad Romano Diansyah', '2017-05-24 04:01:57', 0, 81284863256, 'romano.diansyah@gmail.com', '5c60fe0d492919d196e3a57352d609c34ba12ddc21f9a69ef442b210d6ed5153', 1, ''),
+(17, 'PENDY1234', 'Pendy Prasetya', '2017-05-24 09:40:38', 0, 81284863256, 'pendy@pendy.com', 'e7d0d0d4a73d534926d9b92dae78dc211b2e35d209037c97c751ba6bb3b1f688', 1, ''),
+(18, 'BANGSAT', 'Nuh Satria', '2017-05-25 14:48:07', 100, 6666666, 'bang@sat.com', '4077902c11d06e1058060d1bd789e7c5a1db2bbecbc39b8d161c1d131c2ac1b7', 1, '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `vouchers`
+-- Table structure for table `vouchers`
 --
 
 CREATE TABLE `vouchers` (
@@ -150,12 +185,20 @@ CREATE TABLE `vouchers` (
   `points_needed` int(11) NOT NULL,
   `voucher_type` varchar(255) NOT NULL,
   `active` int(11) NOT NULL DEFAULT '0',
-  `quantity` int(11) NOT NULL DEFAULT '0'
+  `quantity` int(11) NOT NULL DEFAULT '0',
+  `image` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `assoc`
+--
+ALTER TABLE `assoc`
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `voucher_id` (`voucher_id`);
 
 --
 -- Indexes for table `menus`
@@ -176,7 +219,14 @@ ALTER TABLE `ratings_and_comments`
 --
 ALTER TABLE `restaurants`
   ADD PRIMARY KEY (`restaurant_id`),
-  ADD KEY `user` (`user`);
+  ADD KEY `user` (`user_id`);
+
+--
+-- Indexes for table `restaurants_images`
+--
+ALTER TABLE `restaurants_images`
+  ADD PRIMARY KEY (`image_id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
 
 --
 -- Indexes for table `users`
@@ -198,38 +248,56 @@ ALTER TABLE `vouchers`
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `restaurants_images`
+--
+ALTER TABLE `restaurants_images`
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `vouchers`
 --
 ALTER TABLE `vouchers`
   MODIFY `voucher_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `menus`
+-- Constraints for table `assoc`
+--
+ALTER TABLE `assoc`
+  ADD CONSTRAINT `assoc_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `assoc_ibfk_2` FOREIGN KEY (`voucher_id`) REFERENCES `vouchers` (`voucher_id`);
+
+--
+-- Constraints for table `menus`
 --
 ALTER TABLE `menus`
   ADD CONSTRAINT `menus_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`restaurant_id`);
 
 --
--- Ketidakleluasaan untuk tabel `ratings_and_comments`
+-- Constraints for table `ratings_and_comments`
 --
 ALTER TABLE `ratings_and_comments`
   ADD CONSTRAINT `ratings_and_comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   ADD CONSTRAINT `ratings_and_comments_ibfk_2` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`restaurant_id`);
+
+--
+-- Constraints for table `restaurants_images`
+--
+ALTER TABLE `restaurants_images`
+  ADD CONSTRAINT `restaurants_images_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`restaurant_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

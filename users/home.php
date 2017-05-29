@@ -78,6 +78,7 @@
                     Enjoy Bogor
                 </div>
 				<div class="links">
+					<a href="crud/user/index.php">Profile</a>
                     <a href="crud/restaurants/index.php">Restaurants List</a>
                     <a href="crud/vouchers/index.php">Vouchers List</a>
                     <a href="crud/menus/index.php">Menu List</a>

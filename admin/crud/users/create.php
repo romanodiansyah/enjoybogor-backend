@@ -1,3 +1,10 @@
+<?php
+ session_start();
+ if (empty($_SESSION['user_id'])) {
+	header("location:../../../commonfunction/login/login.php"); // jika belum login, maka dikembalikan ke file form_login.php
+ }
+ else {
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,3 +67,4 @@
 
 </body>
 </html>
+ <?php } ?>

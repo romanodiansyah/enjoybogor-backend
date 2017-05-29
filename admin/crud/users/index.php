@@ -1,3 +1,10 @@
+<?php
+ session_start();
+ if (empty($_SESSION['user_id'])) {
+	header("location:../commonfunction/login/login.php"); // jika belum login, maka dikembalikan ke file form_login.php
+ }
+ else {
+ ?>
 <?php require_once '../../../connect/db_connect.php'; ?>
 
 <!DOCTYPE html>
@@ -40,7 +47,7 @@
 		</thead>
 		<tbody>
 			<?php
-            $sql = "SELECT * FROM users WHERE active = 1";
+            $sql = "SELECT user_name,username,user_contact,email,user_id FROM users WHERE active = 1";
             $result = $connect->query($sql);
 
             if ($result->num_rows >0) {
@@ -68,3 +75,4 @@
 </body>
 </html>
 </html>
+ <?php } ?>

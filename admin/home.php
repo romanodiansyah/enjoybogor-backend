@@ -80,6 +80,7 @@
 				<div class="links">
                     <a href="crud/users/index.php">Member</a>
                     <a href="crud/restaurants/index.php">Restaurants</a>
+					<a href="crud/approve_image/index.php">Approve Image</a>
                     <a href="crud/vouchers/index.php">Vouchers</a>
                     <a href="crud/menus/index.php">Menu</a>
 					<a href="../commonfunction/logout/logout.php">Logout</a>

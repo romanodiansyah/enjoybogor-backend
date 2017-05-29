@@ -2,7 +2,7 @@
  // memanggil file koneksi.php
  require_once '../../../connect/db_connect.php';
  // membuat variable dengan nilai dari form
- $username = $_POST['username']; // variablenya = username, dan nilainya sesuai yang dimasukkan di input name="username" tadi
+ $username = strtoupper($_POST['username']); // variablenya = username, dan nilainya sesuai yang dimasukkan di input name="username" tadi
  $hashpassword = $_POST['password'];
  $password = hash('sha256',$hashpassword); // variable password, dan nilainya sesuai yang dimasukkan di input name="password" tadi
  // md5 ada sebuah fungsi PHP untuk engkripsi. misalnya admin jadi 21232f297a57a5a743894a0e4a801fc3. untuk lengkapnya, silahkan googling tentang md5

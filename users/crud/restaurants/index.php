@@ -1,24 +1,31 @@
+<?php
+ session_start();
+ if (empty($_SESSION['user_id'])) {
+	header("location:../commonfunction/login/login.php"); // jika belum login, maka dikembalikan ke file form_login.php
+ }
+ else {
+ ?>
 <?php require_once '../../../connect/db_connect.php'; ?>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Enjoy Bogor</title>
-	
+
 	<style type="text/css">
 		.manageMember
 		{
 			width: 100%;
 			margin: auto;
 		}
-		
+
 		table
 		{
 			width: 100%;
 			margin-top: 20px;
 		}
 	</style>
-	
+
 </head>
 <body>
 
@@ -29,6 +36,7 @@
 		<thead>
 			<tr>
 				<th>Restaurant Name</th>
+        <th>Image</th>
 				<th>Address</th>
 				<th>Category</th>
 				<th>Contact</th>
@@ -40,7 +48,7 @@
 			<?php
 			$sql = "SELECT * FROM restaurants WHERE active = 2";
 			$result = $connect->query($sql);
-			
+
 			if($result->num_rows >0)
 			{
 				while($row = $result->fetch_assoc())
@@ -48,7 +56,8 @@
 					echo "
 					<tr>
 						<td><a href='restaurant/index.php?restaurant_id=".$row['restaurant_id']."'> ".$row['restaurant_name']."</a></td>
-						<td> ".$row['restaurant_address']."</td>
+            <td> <img src='../../../restaurant_image/".$row['image']."' width='100' height='70'> </td>
+            <td> ".$row['restaurant_address']."</td>
 						<td> ".$row['restaurant_category']."</td>
 						<td> ".$row['restaurant_contact']."</td>
 						<td> ".$row['restaurant_description']."</td>
@@ -71,3 +80,4 @@
 </body>
 </html>
 </html>
+<?php } ?>

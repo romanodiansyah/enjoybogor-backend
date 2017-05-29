@@ -1,11 +1,18 @@
 <?php
+ session_start();
+ if (empty($_SESSION['user_id'])) {
+	header("location:../commonfunction/login/login.php"); // jika belum login, maka dikembalikan ke file form_login.php
+ }
+ else {
+ ?>
+<?php
 
 require_once '../../../connect/db_connect.php';
 
 if ($_GET['voucher_id']) {
     $voucher_id = $_GET['voucher_id'];
 
-    $sql = "SELECT * FROM vouchers WHERE voucher_id = {$voucher_id}";
+    $sql = "SELECT voucher_name,voucher_id,points_needed,voucher_type,quantity FROM vouchers WHERE voucher_id = {$voucher_id}";
     $result = $connect->query($sql);
 
     $data = $result->fetch_assoc();
@@ -73,6 +80,6 @@ if ($_GET['voucher_id']) {
 </html>
 
 <?php
-
+}
 }
 ?>
