@@ -5,7 +5,7 @@ require_once '../../../connect/db_connect.php';
 if($_POST)
 {
 	$user_name = $_POST['user_name'];
-	$username = strtoupper($_POST['username']);
+	$username = $_POST['username'];
 	$user_contact = $_POST['user_contact'];
 	$email = $_POST['email'];
 	$hashpassword = $_POST['password'];

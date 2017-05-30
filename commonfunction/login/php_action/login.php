@@ -13,7 +13,7 @@
  $perintah = "select * from users WHERE username = '$username' AND password = '$password'";
  $hasil = mysqli_query($connect,$perintah);
  $row = mysqli_fetch_array($hasil,MYSQLI_BOTH);
- if ($row['username'] == $username AND $row['password'] == $password) {
+ if (strtoupper($row['username']) == $username AND $row['password'] == $password) {
  session_start(); // memulai fungsi session
  $user_id = $row['user_id'];
  $_SESSION['user_id'] = $user_id;
