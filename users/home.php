@@ -87,5 +87,45 @@
                 </div>
             </div>
         </div>
+		<?php
+		require_once '../connect/db_connect.php';
+		$sql = "SELECT restaurant_id,restaurant_name,image from restaurants  where not image='NULL.jpg' and active=2 order by date_made DESC";
+		$result = $connect->query($sql);
+		if($result->num_rows >2)
+		{
+			$counter = 3;
+			while($counter)
+			{
+				$row = $result->fetch_assoc()
+				
+				 ?><a href='crud/restaurants/restaurant/index.php?restaurant_id=".$row['restaurant_id']."'><img src='../restaurant_image/<?php echo $row['image']?>' width='100' height='100'><?php
+				$counter = $counter - 1;
+			}
+		}
+		else if($result->num_rows >1)
+		{
+			$counter = 2;
+			while($counter)
+			{
+				$row = $result->fetch_assoc()
+				
+				 ?><a href='crud/restaurants/restaurant/index.php?restaurant_id=".$row['restaurant_id']."'><img src='../restaurant_image/<?php echo $row['image']?>' width='100' height='100'></a><?php
+				$counter = $counter - 1;
+			}
+		}
+		else if($result->num_rows >0)
+		{
+			$counter = 1;
+			while($counter)
+			{
+				$row = $result->fetch_assoc()
+				
+				 ?><a href='crud/restaurants/restaurant/index.php?restaurant_id=".$row['restaurant_id']."'><img src='../restaurant_image/<?php echo $row['image']?>' width='100' height='100'></a><?php
+				$counter = $counter - 1;
+			}
+		}
+		else {
+			echo "No Restaurants Available";
+		}?>
     </body>
 <?php } ?>

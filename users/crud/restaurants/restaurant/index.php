@@ -14,6 +14,12 @@
 	$result = $connect->query($sql);
 	$sqli= "SELECT * FROM ratings_and_comments WHERE restaurant_id='$restaurant_id'";
 	$resulti = $connect->query($sqli);
+	$beforecounterr = "SELECT COUNT(rating) as rating from ratings_and_comments WHERE restaurant_id='$restaurant_id'";
+	$beforecounter = $connect->query($beforecounterr);
+	$counter = $beforecounter->fetch_assoc();
+	$beforesumm = "SELECT SUM(rating) as rating from ratings_and_comments WHERE restaurant_id='$restaurant_id'";
+	$beforesum = $connect->query($beforesumm);
+	$sum = $beforesum->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -49,10 +55,14 @@
 	?>
 	<a href='moreimage.php?restaurant_id=<?php  echo "$restaurant_id"; ?>'><button type="button">More Images</button></a>
 	<?php
-	if($hasil['counterrating']>0)
+	if($counter>0)
 	{
-		$rataan=$hasil['sumrating']/$hasil['counterrating'];		
+		$rataan=$sum['rating']/$counter['rating'];		
 		echo "<h1>$rataan</br></h1>";		
+	}
+	else
+	{
+		echo "Belum ada Rating";
 	}
 	echo "$hasil[restaurant_description]";
 ?>

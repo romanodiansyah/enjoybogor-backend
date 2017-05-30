@@ -36,7 +36,7 @@ if ($_POST) {
   			{ // Cek apakah gambar berhasil diupload atau tidak
   				// Jika gambar berhasil diupload, Lakukan :
   				// Proses simpan ke Database
-  				$sql = "INSERT INTO restaurants (restaurant_id,restaurant_name,restaurant_address,restaurant_category,restaurant_contact,restaurant_description,active,user_id,image) VALUES ('','$restaurant_name','$restaurant_address','$restaurant_category', '$restaurant_contact', '$restaurant_description',1,'$user_id','$file_name')";
+  				$sql = "INSERT INTO restaurants (restaurant_id,restaurant_name,restaurant_address,restaurant_category,restaurant_contact,restaurant_description,active,user_id,image,date_made) VALUES ('','$restaurant_name','$restaurant_address','$restaurant_category', '$restaurant_contact', '$restaurant_description',1,'$user_id','$file_name',NOW())";
           if ($connect->query($sql) === true) {
       		//echo $sql;// boleh diganti nih, pointnya mau bertambah berapa jika add restaurant
               echo "<p> New Restaurant Successfully Created, please wait for the approve</p>";

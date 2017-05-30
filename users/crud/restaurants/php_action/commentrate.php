@@ -18,10 +18,7 @@ $user_id = $_SESSION['user_id'];
 		$datt = "select * from restaurants WHERE restaurant_id = '$restaurant_id'";
 		$hasil = mysqli_query($connect,$datt);
 		$row2 = mysqli_fetch_array($hasil,MYSQLI_BOTH);
-		$newcounter=$row2['counterrating']+1;
-		$newsum=$row2['sumrating']+$rate;
 		$sql = "INSERT INTO ratings_and_comments (user_id,restaurant_id,comment,rating) VALUES ($user_id,$restaurant_id,'$comment',$rate)";
-		$sqll = "UPDATE restaurants SET counterrating='$newcounter',sumrating='$newsum' WHERE restaurant_id={$restaurant_id}";
 		if($connect->query($sqll) === TRUE)
 		{
 			echo "berhasil  " ;
