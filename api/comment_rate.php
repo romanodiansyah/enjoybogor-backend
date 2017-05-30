@@ -1,17 +1,20 @@
 <?php
 
-require_once '../../../../connect/db_connect.php';
+include '../connect/db_connect.php';
 
-session_start();
-$user_id = $_SESSION['user_id'];
+$json_input_data=json_decode(file_get_contents('php://input'), true);
 
-	$restaurant_id = $_POST['restaurant_id'];
-	$comment = $_POST['comment'];
-	$rate = $_POST['rating'];
+  $user_id = $json_input_data['user_id'];
+	$restaurant_id = $json_input_data['restaurant_id'];
+	$comment = $json_input_data['comment'];
+  $rate = $json_input_data['rating'];
+
+
 	$perintah = "select * from ratings_and_comments WHERE user_id = '$user_id' AND restaurant_id = '$restaurant_id' ";
 	$hasil = $connect->query($perintah);
 	if ($hasil->num_rows > 0) {
-		echo "anda sudah memberi komentar !</br>" ;
+		//echo "anda sudah memberi komentar !</br>" ;
+    echo '{"status":"fail","message":"You have commented before"}';
 		// header("location:../home.php");  jika berhasil login, maka masuk ke file home.php
 	}
 	else {
@@ -24,16 +27,17 @@ $user_id = $_SESSION['user_id'];
 		$sqll = "UPDATE restaurants SET counterrating='$newcounter',sumrating='$newsum' WHERE restaurant_id={$restaurant_id}";
 		if($connect->query($sqll) === TRUE)
 		{
-			echo "berhasil  " ;
+			//echo '{"status":"success","message":"Your comment and rating has been sent"}';
 		}
 		if($connect->query($sql) === TRUE)
 		{
-			echo "<p> Succsessfull ! </p>";
-			echo "<a href='../restaurant/index.php?restaurant_id=$restaurant_id'><button type='button'>Back</button></a>";
+			//echo "<p> Succsessfull ! </p>";
+			//echo "<a href='../restaurant/index.php?restaurant_id=$restaurant_id'><button type='button'>Back</button></a>";
+      echo '{"status":"success","message":"Your comment and rating has been sent"}';
 		}
 		else
 		{
-			echo "Error " . $sql . ' ' . $connect->connect_error;
-		}	
+			echo '{"status":"fail","message":"Unexpected error happened"}';
+		}
 	}
 ?>
