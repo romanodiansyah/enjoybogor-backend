@@ -9,7 +9,7 @@ $data = array();
 
 if($result->num_rows >0){
   while($row = $result->fetch_assoc()){
-    $data[]=array("voucher_name"=>$row['voucher_name'], "voucher_id"=> $row['voucher_id']);
+    $data[]=array("voucher_name"=>$row['voucher_name'], "voucher_id"=> $row['voucher_id'],"image"=>$row['image']);
   }
   echo json_encode($data);
 }

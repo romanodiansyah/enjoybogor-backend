@@ -10,11 +10,22 @@ $data = array();
 
 $sql = "SELECT * FROM restaurants WHERE active = 2";
 $result = $connect->query($sql);
+$rataan = 0;
 
 
 if ($result->num_rows >0) {
     while ($row = $result->fetch_assoc()) {
-        $data[]=array("name"=>$row['restaurant_name'], "address" =>$row['restaurant_address'], "category"=> $row['restaurant_category'], "contact"=>  $row['restaurant_contact'],"description"=> $row['restaurant_description'],"restaurant_id"=>$row['restaurant_id']);
+      $rest_id=$row['restaurant_id'];
+
+      $beforecounterr = "SELECT COUNT(rating) as rating from ratings_and_comments WHERE restaurant_id='$rest_id'";
+      $beforecounter = $connect->query($beforecounterr);
+      $counter = $beforecounter->fetch_assoc();
+      $beforesumm = "SELECT SUM(rating) as rating from ratings_and_comments WHERE restaurant_id='$rest_id'";
+      $beforesum = $connect->query($beforesumm);
+      $sum = $beforesum->fetch_assoc();
+      $rataan=(string)($sum['rating']/$counter['rating']);
+        $data[]=array("name"=>$row['restaurant_name'], "address" =>$row['restaurant_address'], "category"=> $row['restaurant_category'], "contact"=>  $row['restaurant_contact'],"description"=> $row['restaurant_description'],"image"=>$row['image'],"restaurant_rating"=>$rataan ,"restaurant_id"=>$row['restaurant_id']);
+
     }
     echo json_encode($data);
 } else {
@@ -23,5 +34,3 @@ if ($result->num_rows >0) {
 
 
 //name , nama_user_input  , tanggal , description , total_baca  total_komentar
-
-// echo '[{"name":"Kematian Pohon Pete Akibat Campuran Terasi","description":"Pertanyaan IPB Cyber Extension (Cybex) 2016 Lembaga Penelitian dan Pengabdian kepada Masyarakat  IPB...","artikel_status":"publish","tanggal":"6 bulan yang lalu","nama_user_input":"Weni Handayani","total_baca":"805","total_komentar":"1","foto":null},{"name":"Bagaimana pengolahan singkong agar bisa menjadi beras dan disimpan dalam jangka waktu yang lama? ","description":"Bagaimana pengolahan singkong agar bisa menjadi beras dan disimpan dalam jangka waktu yang lama?","artikel_status":"publish","tanggal":"6 bulan yang lalu","nama_user_input":"Weni Handayani","total_baca":"152","total_komentar":"0","foto":null},{"name":"Apakah padi ipb 3s dan pepaya calina cocok untuk ditanam di daerah puncak dekat Cipanas?","description":"Pertanyaan IPB Cyber Extension (Cybex) 2016 Lembaga Penelitian dan Pengabdian kepada Masyarakat  IPB...","artikel_status":"publish","tanggal":"6 bulan yang lalu","nama_user_input":"IPBCYBEX","total_baca":"144","total_komentar":"0","foto":null},{"name":"Apakah kotoran ayam bisa dijadikan pupuk cair? ","description":"Pertanyaan IPB Cyber Extension (Cybex) 2016 Lembaga Penelitian dan Pengabdian kepada Masyarakat  IPB...","artikel_status":"publish","tanggal":"6 bulan yang lalu","nama_user_input":"IPBCYBEX","total_baca":"206","total_komentar":"0","foto":null},{"name":"Bagaimana Cara Pengolahan Singkong Menjadi Beras atau Oyek?","description":"Pertanyaan IPB Cyber Extension (Cybex) 2016 Lembaga Penelitian dan Pengabdian kepada Masyarakat  IPB...","artikel_status":"publish","tanggal":"6 bulan yang lalu","nama_user_input":"IPBCYBEX","total_baca":"130","total_komentar":"0","foto":null}]';

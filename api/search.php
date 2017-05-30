@@ -66,7 +66,7 @@ if($search!=''){
 			{
 				while($row = $result->fetch_assoc())
 				{
-					$data[]=array("restaurant_id"=>$row['restaurant_id'], "restaurant_name"=> $row['restaurant_name'], "restaurant_address"=>$row['restaurant_address'], "restaurant_category"=>$row['restaurant_category'],"restaurant_contact"=>$row['restaurant_contact']);
+					$data[]=array("restaurant_id"=>$row['restaurant_id'], "restaurant_name"=> $row['restaurant_name'], "restaurant_address"=>$row['restaurant_address'], "restaurant_category"=>$row['restaurant_category'],"restaurant_contact"=>$row['restaurant_contact'],"image"=>$row['image']);
 						// $row['restaurant_id']
             // $row['restaurant_name']
 						// $row['restaurant_address']
