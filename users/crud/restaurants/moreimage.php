@@ -5,9 +5,9 @@
  }
  else {?>
 <?php
-   require_once '../../../../connect/db_connect.php';
+   require_once '../../../connect/db_connect.php';
    $restaurant_id=$_GET['restaurant_id'];
-   $sql= "SELECT * FROM restaurants_images WHERE restaurant_id='$restaurant_id' AND active=2";
+   $sql= "SELECT * FROM restaurant_image WHERE restaurant_id='$restaurant_id' AND active=2";
    $result = $connect->query($sql);
    if($result->num_rows>0)
    {
@@ -16,8 +16,9 @@
        echo "
        <tr>
          <td>
-              <img src='../../../../restaurant_images/".$row['image']."' width='200' height='110'><br>
+              <img src='../../../restaurant_images/".$row['image']."' width='200' height='110'><br>
          </td>
+         <td> <a href='php_action/removeimage.php?image_id=".$row['image_id']."'><button type='button'>Remove</button></a> </td>
          <br></br>
        </tr>";
      }
@@ -25,7 +26,6 @@
    else
    {
      echo "No Image<br>";
-
    }
 ?>
 

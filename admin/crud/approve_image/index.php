@@ -45,7 +45,7 @@
 		</thead>
 		<tbody>
 			<?php
-            $sql = "SELECT * FROM restaurant_image WHERE active = 1";
+            $sql = "SELECT * FROM restaurants_images WHERE active = 1";
             $result = $connect->query($sql);
 
             if ($result->num_rows >0) {

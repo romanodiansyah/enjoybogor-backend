@@ -6,7 +6,7 @@ if($_POST)
 {
 	$image_id = $_POST['image_id'];
 
-	$sql = "UPDATE restaurant_image SET active = 0 WHERE image_id = {$image_id}";
+	$sql = "UPDATE restaurants_images SET active = 0 WHERE image_id = {$image_id}";
 	if($connect->query($sql) === TRUE)
 	{
 		echo "<p>Successfully Deleted!</p>";

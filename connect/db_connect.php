@@ -1,8 +1,8 @@
 <?php
 
-$localhost = "192.168.33.10";
+$localhost = "127.0.0.1";
 $username = "root";
-$password = "root";
+$password = "";
 $dbname = "enjoybogor_data";
 
 	// buat koneksi

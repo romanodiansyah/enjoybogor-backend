@@ -7,7 +7,7 @@ require_once '../../../../connect/db_connect.php';
 if($_POST)
 {
 	$image_id = $_POST['image_id'];
-	$perintah = "select * FROM restaurant_image WHERE image_id = '$image_id'";
+	$perintah = "select * FROM restaurants_images WHERE image_id = '$image_id'";
 	$hasil = mysqli_query($connect,$perintah);
 	$row = mysqli_fetch_array($hasil,MYSQLI_BOTH);
 	$user_id = $row['user_id'];
@@ -15,7 +15,7 @@ if($_POST)
 	$hasil = mysqli_query($connect,$perintah);
 	$row = mysqli_fetch_array($hasil,MYSQLI_BOTH);
 	$points=$row['points'];
-	$sql = "UPDATE restaurant_image SET active = 2 WHERE image_id = {$image_id}";
+	$sql = "UPDATE restaurants_images SET active = 2 WHERE image_id = {$image_id}";
 	$tambah=100; // default set point + 100 dulu..
 	$points=$points+$tambah;
 	$sqll = "UPDATE users SET points='$points' WHERE user_id={$user_id}";

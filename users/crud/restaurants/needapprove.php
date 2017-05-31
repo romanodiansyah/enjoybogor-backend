@@ -30,46 +30,47 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </head>
 <body>
 
 <div class="manageMember">
+	<a href="create.php"><button type="button">Add Restaurant</button></a>
 	<a href="../../home.php"><button type="button">Home</button></a>
+	<a href="index.php"><button type="button">Back</button></a>
 	<table border="1" cellspacing="0" cellpadding="0">
 		<thead>
 			<tr>
-				<th>Food Name</th>
-				<th>Image 1</th>
-				<th>Image 2</th>
-				<th>Price</th>
-				<th>Portion Size</th>
+				<th>Restaurant Name</th>
+				<th>Address</th>
+				<th>Category</th>
+				<th>Contact</th>
 				<th>Description</th>
+				<th>Option</th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php
-            $sql = "SELECT * FROM menus WHERE active = 2";
+            $sql = "SELECT * FROM restaurants WHERE active = 1";
             $result = $connect->query($sql);
 
             if ($result->num_rows >0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "
 					<tr>
-						<td> ".$row['food_name']."</td>
-						<td> <img src='../../../menu_image/".$row['image1']."' width='100' height='70'> </td>
-						<td> <img src='../../../menu_image/".$row['image2']."' width='100' height='70'> </td>
-						<td> ".$row['price']."</td>
-						<td> ".$row['portion_size']."</td>
-						<td> ".$row['menu_description']."</td>
+						<td> ".$row['restaurant_name']."</td>
+						<td> ".$row['restaurant_address']."</td>
+						<td> ".$row['restaurant_category']."</td>
+						<td> ".$row['restaurant_contact']."</td>
+						<td> ".$row['restaurant_description']."</td>
 						<td>
-							<a href='edit.php?menu_id=".$row['menu_id']."'><button type='button'>Edit</button></a>
-							<a href='remove.php?menu_id=".$row['menu_id']."'><button type='button'>Remove</button></a>
+							<a href='edit.php?restaurant_id=".$row['restaurant_id']."'><button type='button'>Edit</button></a>
+							<a href='remove.php?restaurant_id=".$row['restaurant_id']."'><button type='button'>Decline</button></a>
+							<a href='approve.php?restaurant_id=".$row['restaurant_id']."'><button type='button'>Approve</button></a>
 						</td>
 					</tr>";
                 }
             } else {
-                    echo "<tr><td colspan='5'><center>No Data Available</center></td></tr>";
+                    echo "<tr><td colspan='6'><center>No Data Available</center></td></tr>";
                 }
             ?>
 		</tbody>
@@ -79,4 +80,4 @@
 </body>
 </html>
 </html>
-<?php } ?>
+ <?php }?>

@@ -6,7 +6,7 @@ session_start();
 $user_id = $_SESSION['user_id'];
 
 //dapetin id yg terakhir
-$count = mysqli_query($connect, "SELECT image_id FROM restaurant_image ORDER BY image_id DESC");
+$count = mysqli_query($connect, "SELECT image_id FROM restaurants_images ORDER BY image_id DESC");
 $count = mysqli_fetch_assoc($count);
 $count = $count['image_id']+1;
 
@@ -35,7 +35,7 @@ if($file_type == "image/jpeg" || $file_type == "image/png"){ // Cek apakah tipe 
     if(move_uploaded_file($tmp_file, $path)){ // Cek apakah gambar berhasil diupload atau tidak
       // Jika gambar berhasil diupload, Lakukan :
       // Proses simpan ke Database
-      $sql = "INSERT INTO restaurant_image (image_id,restaurant_id,image,user_id,active) VALUES ('','$restaurant_id','$file_name','$user_id',1)";
+      $sql = "INSERT INTO restaurants_images (image_id,restaurant_id,image,user_id,active) VALUES ('','$restaurant_id','$file_name','$user_id',1)";
       if ($connect->query($sql) === true){ // Cek jika proses simpan ke database sukses atau tidak
         // Jika Sukses, Lakukan :
         echo "berhasil" ;
