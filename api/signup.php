@@ -18,7 +18,7 @@ $check = mysqli_query($connect, "SELECT * FROM users WHERE username='".$username
 if (mysqli_num_rows($check) > 0) {
     echo '{"status":"multiple"}';
 } else {
-    $sql = "INSERT INTO users (user_id,username,user_name,date_signup,points,user_contact,email,password,active) VALUES ('','$username','$user_name',NOW(),0, '$user_contact', '$email', '$password',1)";
+    $sql = "INSERT INTO users (user_id,username,user_name,date_signup,points,user_contact,email,password,active,image) VALUES ('','$username','$user_name',NOW(),0, '$user_contact', '$email', '$password',1,'NULL.jpg')";
     if ($connect->query($sql) === true) {
         echo '{"status":"berhasil"}';
     } else {

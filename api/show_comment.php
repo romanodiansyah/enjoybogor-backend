@@ -7,7 +7,7 @@ include '../connect/db_connect.php';
 
 	$sqli= "SELECT * FROM ratings_and_comments WHERE restaurant_id='$restaurant_id'";
 	$resulti = $connect->query($sqli);
-
+  
 $data = array();
 
 		if($resulti->num_rows>0)
