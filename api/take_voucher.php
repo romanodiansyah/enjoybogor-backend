@@ -54,7 +54,7 @@ $user_id = $json_input_data['user_id'];
 		}
 		else
 		{
-			echo '{"status":"fail","message":"Your points is not enough"}';
+			echo '{"status":"fail","message":"Your coins is not enough"}';
 		}
 	}
 
