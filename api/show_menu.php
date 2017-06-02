@@ -13,7 +13,7 @@ if($result->num_rows >0)
   while($row = $result->fetch_assoc())
   {
 
-    $data[]=array("food_name"=>$row['food_name'], "price"=> $row['price'],"portion_size"=>$row['portion_size'],"menu_id"=>$row['menu_id'],"menu_description"=>$row['menu_description'],"image1"=>$row['image1'],"image2"=>$row['image2']);
+    $data[]=array("food_name"=>$row['food_name'], "price"=> $row['price'],"portion_size"=>$row['portion_size'],"menu_id"=>$row['menu_id'],"menu_description"=>$row['menu_description']);
   }
   echo json_encode($data);
 }
