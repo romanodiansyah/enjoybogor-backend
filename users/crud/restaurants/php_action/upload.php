@@ -24,7 +24,7 @@ $tmp_file = $_FILES['image']['tmp_name'];
 $file_name = $count.'_'.$file_name; // ganti nama
 
 // Set path folder tempat menyimpan gambarnya
-$path = "../../../../restaurant_images/".$file_name;
+$path = "../../../../restaurant_image/".$file_name;
 
 
 if($file_type == "image/jpeg" || $file_type == "image/png"){ // Cek apakah tipe file yang diupload adalah JPG / JPEG / PNG

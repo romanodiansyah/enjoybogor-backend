@@ -53,7 +53,7 @@
                     echo "
 					<tr>
 						<td> ".$row['restaurant_id']."</td>
-            <td> <img src='../../../restaurant_images/".$row['image']."' width='100' height='70'> </td>
+            <td> <img src='../../../restaurant_image/".$row['image']."' width='100' height='70'> </td>
 						<td>
 							<a href='remove.php?image_id=".$row['image_id']."'><button type='button'>Decline</button></a>
 							<a href='approve.php?image_id=".$row['image_id']."'><button type='button'>Approve</button></a>

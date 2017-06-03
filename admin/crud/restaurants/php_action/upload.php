@@ -22,7 +22,7 @@ $file_type = $_FILES['image']['type'];
 $tmp_file = $_FILES['image']['tmp_name'];
 
 // Set path folder tempat menyimpan gambarnya
-$path = "../../../../restaurant_images/".$file_name;
+$path = "../../../../restaurant_image/".$file_name;
 $file_name = $count.'_'.$file_name;
 
 

@@ -16,7 +16,7 @@
        echo "
        <tr>
          <td>
-              <img src='../../../../restaurant_images/".$row['image']."' width='200' height='110'><br>
+              <img src='../../../../restaurant_image/".$row['image']."' width='200' height='110'><br>
          </td>
          <br></br>
        </tr>";

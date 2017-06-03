@@ -16,7 +16,7 @@
        echo "
        <tr>
          <td>
-              <img src='../../../restaurant_images/".$row['image']."' width='200' height='110'><br>
+              <img src='../../../restaurant_image/".$row['image']."' width='200' height='110'><br>
          </td>
          <td> <a href='php_action/removeimage.php?image_id=".$row['image_id']."'><button type='button'>Remove</button></a> </td>
          <br></br>
