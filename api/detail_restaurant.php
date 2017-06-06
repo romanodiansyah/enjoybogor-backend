@@ -30,5 +30,5 @@ include '../connect/db_connect.php';
   $status =0;
 
 $back= array();
-  $back[] = array("restaurant_name"=>$restaurant_name, "restaurant_description"=>$restaurant_description, "restaurant_contact"=>$restaurant_contact,"restaurant_address"=>$restaurant_address ,"restaurant_category"=>$restaurant_category,"image" =>$image,"restaurant_rating"=>$rataan );
+  $back[] = array("restaurant_name"=>$restaurant_name, "restaurant_description"=>$restaurant_description, "restaurant_contact"=>$restaurant_contact,"restaurant_address"=>$restaurant_address ,"restaurant_category"=>$restaurant_category,"image" =>$image,"restaurant_rating"=>$rataan,"restaurant_id"=>$restaurant_id );
   echo json_encode($back);
